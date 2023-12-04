@@ -1,4 +1,3 @@
-'''from replit import clear
 import random
 import hangman_words
 import hangman_art
@@ -22,7 +21,7 @@ for _ in range(word_length):
 
 while not end_of_game:
     guess = input("Guess a letter: ").lower()
-    clear()
+
     
     check += guess
     double_check = guess
@@ -47,4 +46,4 @@ while not end_of_game:
         end_of_game = True
         print("You won.")
 
-    print(hangman_art.stages[lives])'''
+    print(hangman_art.stages[lives])
