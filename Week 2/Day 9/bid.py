@@ -1,4 +1,4 @@
-from replit import clear
+# from replit import clear
 import art
 
 print(art.logo)
@@ -11,7 +11,7 @@ while restart == 'yes':
   bid = int(input("What's your bid?" ))
   total_bidders[name] = bid
   restart = input("Are there any other bidders? Type 'yes' or 'no'. ")
-  clear()
+  # clear()
   if restart == 'no':
     sum = 0
     name = ''
