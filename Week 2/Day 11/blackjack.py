@@ -12,7 +12,7 @@
 ## Cards are not removed from the deck as they are drawn.
 ## The computer is the dealer.
 
-from replit import clear
+# from replit import clear
 from art import logo
 import random
 
@@ -44,7 +44,7 @@ def add_cards(cards, array):
 
 if start == "y":
   while play == True:
-    clear()
+    #clear()
     print(logo)
     user_cards = []
     computer_cards = []
