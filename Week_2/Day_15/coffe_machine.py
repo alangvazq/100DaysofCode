@@ -31,6 +31,7 @@ resources = {
 }
 
 end_transaction = True
+total = 0
 # TODO Function that asks for coins and returns total.
 
 
@@ -58,22 +59,21 @@ while end_transaction:
     if coffee_selection == "off":
         end_transaction = False
     elif coffee_selection == "report":
-        print(f"Water: {resources["water"]}ml\nMilk: {resources["milk"]}ml\nCoffee: {resources["coffee"]}ml")
+        print(f"Water: {resources["water"]}ml\nMilk: {resources["milk"]}ml\nCoffee: {resources["coffee"]}ml\nMoney: ${total}")
     # TODO Check if there are enough ingredients.
     elif coffee_selection in ["espresso", "latte", "cappuccino"]:
         for ingredient, amount in MENU[coffee_selection]["ingredients"].items():
             if resources[ingredient] < amount:
-                print(f"Sorry there is not enough {ingredient}")
+                print(f"Sorry there is not enough {ingredient}.")
                 break
         else:
             # TODO Ask to insert coins.
-            total = cash()
+            total = round(cash())
             if total < MENU[coffee_selection]["cost"]:
                 print("Sorry, you don't have enough")
             else:
                 for ingredient, amount in MENU[coffee_selection]["ingredients"].items():
                     resources[ingredient] -= amount
                 # TODO Print difference and coffee selection.
-                print(MENU[coffee_selection]["cost"])
-                print(f"Here is ${round((total - MENU[coffee_selection]["cost"]), 1)}")
+                print(f"Here is ${(total - MENU[coffee_selection]["cost"])}")
                 print(f"Here is your {coffee_selection} ☕ Enjoy!")
