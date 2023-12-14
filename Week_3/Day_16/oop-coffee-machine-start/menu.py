@@ -27,8 +27,8 @@ class Menu:
         return options
 
     def find_drink(self, order_name):
-        """Searches the menu for a particular drink by name. Returns that item if it exists, otherwise returns None"""
+        """Searches the menu for a particular drink by name. Returns that drink_info if it exists, otherwise returns None"""
         for item in self.menu:
             if item.name == order_name:
                 return item
-        print("Sorry that item is not available.")
+        print("Sorry that drink_info is not available.")
