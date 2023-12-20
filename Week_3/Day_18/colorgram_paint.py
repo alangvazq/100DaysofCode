@@ -27,6 +27,7 @@ colors = [(213, 154, 96), (52, 107, 132), (179, 77, 31), (202, 142, 31), (115, 1
 tim.color(colors[0])
 tim.up()
 tim.speed(0)
+tim.hideturtle()
 
 y = -200
 for _ in range(10):

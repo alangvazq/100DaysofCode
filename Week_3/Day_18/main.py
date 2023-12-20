@@ -10,27 +10,27 @@ colors = ["orange", "yellow", "rosy brown", "navajo white", "dark cyan", "dodger
 
 
 # for _ in range(10):
-#     tim.down()
-#     tim.forward(10)
-#     tim.up()
-#     tim.forward(10)
+#     new_turtle.down()
+#     new_turtle.forward(10)
+#     new_turtle.up()
+#     new_turtle.forward(10)
 
 # side = 2
 # for _ in range(10):
 #     side += 1
-#     tim.color(random.choice(colors))
+#     new_turtle.color(random.choice(colors))
 #     for _ in range(side):
-#         tim.forward(100)
-#         tim.right(360 / side)
+#         new_turtle.forward(100)
+#         new_turtle.right(360 / side)
 
-# tim.speed(0)
-# tim.pensize(5)
+# new_turtle.speed(0)
+# new_turtle.pensize(5)
 # direction = [0, 90, 180, 270]
 #
 # for _ in range(100):
-#     tim.color(random.choice(colors))
-#     tim.seth(random.choice(direction))
-#     tim.forward(25)
+#     new_turtle.color(random.choice(colors))
+#     new_turtle.seth(random.choice(direction))
+#     new_turtle.forward(25)
 
 def random_color():
     r = random.randint(0, 255)
