@@ -13,7 +13,13 @@ screen.setup(width=600, height=600)
 screen.tracer(0)
 
 turtle = Player()
+
+screen.listen()
+screen.onkey(key="w", fun=turtle.move)
+
+
 scoreboard = Scoreboard()
+
 
 for item in range(0, 20):
     car = CarManager()
@@ -21,8 +27,7 @@ for item in range(0, 20):
 
 
 scoreboard.score()
-screen.listen()
-screen.onkey(key="w", fun=turtle.move)
+
 
 game_is_on = True
 while game_is_on:
@@ -31,9 +36,12 @@ while game_is_on:
 
     for car in cars:
         car.move()
-        if car.xcor() < -280:
-            car.goto(280, random.randint(-240, 240))
-        elif turtle.distance(car) < 10:
+        if car.xcor() < -320:
+            car.goto(300, random.randint(-240, 240))
+    
+    for car in cars:
+        if turtle.distance(car) < 20:
+            scoreboard.game()
             game_is_on = False
 
     if turtle.ycor() > 280:
@@ -41,4 +49,4 @@ while game_is_on:
         speed /= 2
         scoreboard.point()
 
-
+screen.exitonclick()
