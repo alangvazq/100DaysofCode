@@ -9,7 +9,7 @@ import pandas
 #             temperatures.append(int(row[1]))
 #     print(temperatures)
 
-data = pandas.read_csv("weather_data.csv")
+# data = pandas.read_csv("weather_data.csv")
 # print(data["temp"])
 
 # data_dict = data.to_dict()
@@ -28,10 +28,13 @@ data = pandas.read_csv("weather_data.csv")
 # print(type(data[data["day"] == "Friday"]))
 
 
-print(data[data["day"] == "Monday"])
+# print(data[data["day"] == "Monday"])
+# monday = data[data["day"] == "Monday"]["temp"]
+# F = (monday * 9/5)+32
 
-monday = data[data["day"] == "Monday"]["temp"]
+# data = pandas.DataFrame(data)
+# data.to_csv("new_dara.csv")
 
-F = (monday * 9/5)+32
+data = pandas.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
 
-print(F)
+print(data.groupby("Primary Fur Color").count())
