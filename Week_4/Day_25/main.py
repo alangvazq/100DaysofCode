@@ -36,5 +36,16 @@ import pandas
 # data.to_csv("new_dara.csv")
 
 data = pandas.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
+fur_colors = data["Primary Fur Color"].to_list()
 
-print(data.groupby("Primary Fur Color").count())
+gray_count = fur_colors.count("Gray")
+cinnamon_count = fur_colors.count("Cinnamon")
+black_count = fur_colors.count("Black")
+
+count = {"Fur Color": ["Gray", "Cinnamon", "Black"],
+         "Count": [gray_count, cinnamon_count, black_count]}
+
+data = pandas.DataFrame(count)
+data.to_csv("squirrel_count.csv")
+
+
