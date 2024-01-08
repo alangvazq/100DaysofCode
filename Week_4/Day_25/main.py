@@ -1,39 +1,60 @@
 # import csv
+
+# Using just file methods
+with open("weather_data.csv") as data_file:
+    data = data_file.readlines()
+    print(data)
+
+# Using csv library
+import csv
+
+with open("weather_data.csv") as data_file:
+    data = csv.reader(data_file)
+    temperatures = []
+    for row in data:
+        if row[1] != "temp":
+            temperatures.append(int(row[1]))
+    print(temperatures)
+
+# Using the pandas library
 import pandas
 
-# with open("./weather_data.csv", "r") as data_file:
-#     data = csv.reader(data_file)
-#     temperatures = []
-#     for row in data:
-#         if row[1] != "temp":
-#             temperatures.append(int(row[1]))
-#     print(temperatures)
+data = pandas.read_csv("weather_data.csv")
+print(type(data))
+print(type(data["temp"]))
 
-# data = pandas.read_csv("weather_data.csv")
-# print(data["temp"])
+data_dict = data.to_dict()
+print(data_dict)
 
-# data_dict = data.to_dict()
-# print(data_dict)
-#
-# data_list = data["temp"].to_list()
-# print(data_list)
-#
-# average = sum(data_list) / len(data_list)
-# print(average)
-#
-# print(data["temp"].max())
+temp_list = data["temp"].to_list()
+print(len(temp_list))
 
-# print(data["condition"])
+print(data["temp"].mean())
+print(data["temp"].max())
 
-# print(type(data[data["day"] == "Friday"]))
+# Get Data in Columns
+print(data["condition"])
+print(data.condition)
 
+# Get Data in Row
+print(data[data.day == "Monday"])
+print(data[data.temp == data.temp.max()])
 
-# print(data[data["day"] == "Monday"])
-# monday = data[data["day"] == "Monday"]["temp"]
-# F = (monday * 9/5)+32
+# Get Row data value
+monday = data[data.day == "Monday"]
+monday_temp = int(monday.temp)
+monday_temp_F = monday_temp * 9 / 5 + 32
+print(monday_temp_F)
 
-# data = pandas.DataFrame(data)
-# data.to_csv("new_dara.csv")
+# Create a dataframe from scratch
+data_dict = {
+    "students": ["Amy", "James", "Angela"],
+    "scores": [76, 56, 65]
+}
+data = pandas.DataFrame(data_dict)
+data.to_csv("new_data.csv")
+
+# Central Park Squirrel Data Analysis
 
 data = pandas.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
 fur_colors = data["Primary Fur Color"].to_list()
@@ -47,5 +68,3 @@ count = {"Fur Color": ["Gray", "Cinnamon", "Black"],
 
 data = pandas.DataFrame(count)
 data.to_csv("squirrel_count.csv")
-
-
