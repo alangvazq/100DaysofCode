@@ -9,7 +9,6 @@ image = "blank_states_img.gif"
 screen.addshape(image)
 
 background = Turtle()
-text = Turtle()
 background.shape(image)
 
 
@@ -21,7 +20,7 @@ background.shape(image)
 # turtle.mainloop()
 
 data = pandas.read_csv("50_states.csv")
-states = data["state"]
+states = data["state"].to_list()
 game_is_on = True
 guessed_list = []
 
@@ -31,20 +30,23 @@ while game_is_on:
     answer_state = screen.textinput(title=f"{len(guessed_list)}/50 States Correct", prompt="What's another state's")
     # TODO Convert the guess to Title case
     titlecase_state = answer_state.title()
+    print(titlecase_state)
 
     # TODO Record the correct guesses in a list
     guessed_list.append(titlecase_state)
 
     # TODO Check if the guess is among the 50 states
-    for state in states:
-        # TODO Write correct guesses onto the map
-        if state.title() == titlecase_state:
-            state_row = data[data["state"] == f"{state}"]
-            text.hideturtle()
-            text.teleport(int(state_row["x"].iloc[0]), int(state_row["y"].iloc[0]))
-            text.write(f"{state}")
-        elif len(guessed_list) == 50:
-            game_is_on = False
+    # TODO Write correct guesses onto the map
+    if titlecase_state in states:
+        text = Turtle()
+        text.hideturtle()
+        state_row = data[data["state"] == f"{titlecase_state}"]
+        text.teleport(int(state_row["x"].iloc[0]), int(state_row["y"].iloc[0]))
+        text.write(f"{titlecase_state}")
+    elif len(guessed_list) == 50:
+        game_is_on = False
 
 
 screen.exitonclick()
+
+
