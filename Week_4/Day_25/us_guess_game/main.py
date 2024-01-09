@@ -11,7 +11,6 @@ screen.addshape(image)
 background = Turtle()
 background.shape(image)
 
-
 # Get coordinates
 # def get_mouse_click_coor(x, y):
 #     print(x, y)
@@ -30,23 +29,24 @@ while game_is_on:
     answer_state = screen.textinput(title=f"{len(guessed_list)}/50 States Correct", prompt="What's another state's")
     # TODO Convert the guess to Title case
     titlecase_state = answer_state.title()
-    print(titlecase_state)
-
-    # TODO Record the correct guesses in a list
-    guessed_list.append(titlecase_state)
 
     # TODO Check if the guess is among the 50 states
     # TODO Write correct guesses onto the map
+    if titlecase_state == "Exit":
+        break
     if titlecase_state in states:
         text = Turtle()
         text.hideturtle()
         state_row = data[data["state"] == f"{titlecase_state}"]
         text.teleport(int(state_row["x"].iloc[0]), int(state_row["y"].iloc[0]))
         text.write(f"{titlecase_state}")
-    elif len(guessed_list) == 50:
-        game_is_on = False
+        # TODO Record the correct guesses in a list
+        guessed_list.append(titlecase_state)
+        states.remove(titlecase_state)
 
 
-screen.exitonclick()
+states_to_learn = pandas.DataFrame(states)
+states_to_learn.to_csv("states_to_learn.csv")
+
 
 
