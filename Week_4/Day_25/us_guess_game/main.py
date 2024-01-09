@@ -20,11 +20,10 @@ background.shape(image)
 
 data = pandas.read_csv("50_states.csv")
 states = data["state"].to_list()
-game_is_on = True
 guessed_list = []
 
 # TODO Use a loop to allow the user to keep guessing
-while game_is_on:
+while len(guessed_list) < 50:
     # TODO Keep track of the score
     answer_state = screen.textinput(title=f"{len(guessed_list)}/50 States Correct", prompt="What's another state's")
     # TODO Convert the guess to Title case
