@@ -64,7 +64,22 @@ def save():
             pass_entry.delete(0, 'end')
 
 
+def find_password():
+    try:
+        with open("data.json", "r") as data_file:
+            # Reading old data
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message="No Data File Found.")
+    else:
+        # Updating old data with new data
+        if web_entry.get() in data:
+            messagebox.showinfo(title=web_entry.get(), message=f"email: {data[web_entry.get()]["email"]}\n pass: {data[web_entry.get()]["password"]}")
+        else:
+            messagebox.showinfo(title="Error", message="No data")
 # ---------------------------- UI SETUP ------------------------------- #
+
+
 window = Tk()
 window.title("Password Manager")
 window.config(padx=50, pady=50)
@@ -83,7 +98,11 @@ web_label.grid(column=0, row=1)
 # Entry Web
 web_entry = ttk.Entry()
 web_entry.focus()
-web_entry.grid(column=1, row=1, columnspan=2, sticky="we")
+web_entry.grid(column=1, row=1, sticky="we")
+
+# Button
+search_button = ttk.Button(text="Search", command=find_password)
+search_button.grid(column=2, row=1, sticky="we")
 
 # Label Email
 email_label = ttk.Label(text="Email/Username: ")
