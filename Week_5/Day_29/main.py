@@ -74,7 +74,7 @@ def find_password():
     else:
         # Updating old data with new data
         if web_entry.get() in data:
-            messagebox.showinfo(title=web_entry.get(), message=f"email: {data[web_entry.get()]["email"]}\n pass: {data[web_entry.get()]["password"]}")
+            messagebox.showinfo(title=web_entry.get(), message=f"Email: {data[web_entry.get()]["email"]}\n Password: {data[web_entry.get()]["password"]}")
         else:
             messagebox.showinfo(title="Error", message="No data")
 # ---------------------------- UI SETUP ------------------------------- #
