@@ -4,10 +4,6 @@ import pandas
 
 BACKGROUND_COLOR = "#B1DDC6"
 
-data = pandas.read_csv("./data/french_words.csv")
-data_dict = data.to_dict(orient="records")
-r_num = 0
-
 
 def select_random():
     return random.randint(0, len(data_dict))
@@ -33,27 +29,54 @@ def flip():
     r_word = data_dict[r_num]["English"]
     canvas.itemconfig(translation, text=r_word)
 
-window = Tk()
-window.title("Flashy")
-window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
-flip_timer = window.after(3000, flip)
 
-canvas = Canvas(width=800, height=526, bg=BACKGROUND_COLOR, highlightthickness=0)
-card = PhotoImage(file="./images/card_front.png")
-card_back = PhotoImage(file="./images/card_back.png")
-image = canvas.create_image(400, 263, image=card)
-word = canvas.create_text(400, 150, text="French", font=("Arial", 40, "italic"))
-translation = canvas.create_text(400, 263, font=("Arial", 60, "bold"))
-canvas.grid(column=1, row=0, columnspan=2)
+def delete_word():
+    global r_num
+    french_data_list.remove(data_dict[r_num]["French"])
+    english_data_list.remove(data_dict[r_num]["English"])
+    new_data_dict = {
+        "French": french_data_list,
+        "English": english_data_list
+    }
+    data_frame = pandas.DataFrame(new_data_dict)
+    data_frame.to_csv("./data/words_to_learn.csv", index=False)
+    random_word()
 
-wrong_img = PhotoImage(file="./images/wrong.png")
-wrong_button = Button(image=wrong_img, command=random_word)
-wrong_button.grid(column=1, row=1)
 
-right_img = PhotoImage(file="./images/right.png")
-right_button = Button(image=right_img, command=flip)
-right_button.grid(column=2, row=1)
+try:
+    with open("data/words_to_learn.csv", "r") as words_to_learn:
+        data = pandas.read_csv("./data/words_to_learn.csv")
+        data_dict = data.to_dict(orient="records")
+        french_data_list = data["French"].to_list()
+        english_data_list = data["English"].to_list()
+except FileNotFoundError:
+    data = pandas.read_csv("./data/french_words.csv")
+    data_dict = data.to_dict(orient="records")
+    french_data_list = data["French"].to_list()
+    english_data_list = data["English"].to_list()
+finally:
+    r_num = 0
 
-random_word()
+    window = Tk()
+    window.title("Flashy")
+    window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
+    flip_timer = window.after(3000, flip)
 
-window.mainloop()
+    canvas = Canvas(width=800, height=526, bg=BACKGROUND_COLOR, highlightthickness=0)
+    card = PhotoImage(file="./images/card_front.png")
+    card_back = PhotoImage(file="./images/card_back.png")
+    image = canvas.create_image(400, 263, image=card)
+    word = canvas.create_text(400, 150, text="French", font=("Arial", 40, "italic"))
+    translation = canvas.create_text(400, 263, font=("Arial", 60, "bold"))
+    canvas.grid(column=1, row=0, columnspan=2)
+
+    wrong_img = PhotoImage(file="./images/wrong.png")
+    wrong_button = Button(image=wrong_img, command=random_word)
+    wrong_button.grid(column=1, row=1)
+
+    right_img = PhotoImage(file="./images/right.png")
+    right_button = Button(image=right_img, command=delete_word)
+    right_button.grid(column=2, row=1)
+
+    random_word()
+    window.mainloop()
