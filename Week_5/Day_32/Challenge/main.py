@@ -11,6 +11,7 @@ password = ""
 
 now = dt.datetime.now()
 today = now.day
+month = now.month
 
 data = pandas.read_csv("birthdays.csv")
 data_dict = data.to_dict()
@@ -27,7 +28,7 @@ o = open(text, "r")
 # TODO Send the letter generated in step 3 to that person's email address.
 
 for day in range(len(data_dict["day"])):
-    if data_dict["day"][day] == today:
+    if data_dict["day"][day] == today and data_dict["month"][day] == month:
         with smtplib.SMTP('smtp-mail.outlook.com', 587) as connection:
             connection.starttls()
             connection.login(user=my_email, password=password)
